@@ -6,6 +6,8 @@ import org.springframework.context.annotation.AnnotationConfigApplicationContext
 
 import java.sql.SQLOutput;
 
+import static com.Epicode.demoSpring.ConfigurationBean.menuList;
+
 @SpringBootApplication
 public class DemoSpringApplication {
 
@@ -13,6 +15,8 @@ public class DemoSpringApplication {
 		SpringApplication.run(DemoSpringApplication.class, args);
 
        MenuConfiguration();
+	   System.out.println(menuList);
+	   Ordine();
 	}
 
 	public static void PizzaConfiguration (){
@@ -89,4 +93,10 @@ public class DemoSpringApplication {
 		ToppingConfiguration();
 		DrinkConfiguration();
 	}
+	public static void Ordine (){
+		AnnotationConfigApplicationContext applicationContext = new AnnotationConfigApplicationContext(ConfigurationBean.class);
+		Ordine o = (Ordine) applicationContext.getBean("ordine1");
+		System.out.println(o);
+	}
+
 }

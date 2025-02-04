@@ -1,9 +1,7 @@
 package com.Epicode.demoSpring;
 
-public class Drink {
-    private String name;
-    private int calories;
-    private double price;
+public class Drink extends ElementiMenu {
+    protected String name;
 
     public Drink( String name, int calories, double price) {
         this.name = name;

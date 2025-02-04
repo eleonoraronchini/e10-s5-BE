@@ -1,9 +1,8 @@
 package com.Epicode.demoSpring;
 
-public class Topping {
+public class Topping extends ElementiMenu {
     private Ingredients ingredient;
-    private int calories;
-    private double price;
+
 
 
     public Topping(Ingredients ingredient, int calories, double price) {

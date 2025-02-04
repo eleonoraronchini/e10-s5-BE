@@ -1,11 +1,10 @@
 package com.Epicode.demoSpring;
 
-public class Pizza {
+public class Pizza extends ElementiMenu{
     protected String name;
     protected Ingredients tomato;
     protected Ingredients cheese;
-    protected int calories;
-    protected double price;
+
 
     public Pizza(String name, Ingredients tomato, Ingredients cheese, int calories, double price) {
         this.name = name;
