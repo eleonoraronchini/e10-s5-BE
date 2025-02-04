@@ -3,12 +3,15 @@ package com.Epicode.demoSpring;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.PropertySource;
+import org.springframework.context.annotation.Scope;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
 @Configuration
+@PropertySource("application.properties")
 public class ConfigurationBean {
 
    public static List<ElementiMenu> menuList = new ArrayList<ElementiMenu>();
@@ -148,40 +151,48 @@ public class ConfigurationBean {
         menuList.add(p);
         return p;
     }
-    @Value("${Ordine.admin.coperto}")
-    private Double coperto;
-  @Bean ("ordine1")
-    public Ordine ordine1 (){
-    Ordine o = new Ordine(1,StatoOrdine.pronto,2, LocalDate.of(2025,3,2),order1,coperto);
-    return o;
-    }
-
-    @Bean ("ordine2")
-    public Ordine ordine2 (){
-        Ordine o = new Ordine(2,StatoOrdine.in_corso,1, LocalDate.of(2025,3,2),order2,coperto);
-        return o;
-    }
-
-    @Bean ("ordine3")
-    public Ordine ordine3 (){
-        Ordine o = new Ordine(3,StatoOrdine.servito,4, LocalDate.of(2025,3,2),order3,coperto);
-        return o;
-    }
     @Bean ("tavolo1")
+    @Scope("prototype")
     public Tavolo tavolo1 (){
         Tavolo t = new Tavolo(12,2,StatoTavolo.occupato);
         return t;
     }
 
     @Bean ("tavolo2")
+    @Scope("prototype")
     public Tavolo tavolo2 (){
         Tavolo t = new Tavolo(45,6,StatoTavolo.libero);
         return t;
     }
 
     @Bean ("tavolo3")
+    @Scope("prototype")
     public Tavolo tavolo3 (){
         Tavolo t = new Tavolo(2,4,StatoTavolo.occupato);
         return t;
     }
+
+    @Value("${ordine.admin.coperto}")
+    private double coperto;
+    @Bean ("ordine1")
+
+    public Ordine ordine1 (){
+    Ordine o = new Ordine(StatoOrdine.pronto,2,order1,tavolo1(),coperto);
+    return o;
+    }
+
+    @Bean ("ordine2")
+
+    public Ordine ordine2 (){
+        Ordine o = new Ordine(StatoOrdine.servito,1,order2,tavolo2(),coperto);
+        return o;
+    }
+
+    @Bean ("ordine3")
+
+    public Ordine ordine3 (){
+        Ordine o = new Ordine(StatoOrdine.in_corso,4, order3,tavolo3(),coperto);
+        return o;
+    }
+
 }

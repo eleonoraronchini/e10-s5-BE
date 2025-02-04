@@ -1,37 +1,44 @@
 package com.Epicode.demoSpring;
 
-
-
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
-
-import java.time.LocalDate;
-import java.util.ArrayList;
+import java.time.LocalTime;
 import java.util.List;
 
-import static java.lang.Integer.parseInt;
 
 @Component
 public class Ordine {
+    private static int count = 1;
     private int id;
     private StatoOrdine statoOrdine;
     private int places;
-    private LocalDate orderDate;
+    private LocalTime ora;
     private List<ElementiMenu> menuList;
+    private Tavolo tavolo;
     private double bill;    //somma dei costi dei suoi elementi e dei coperti
-    private Double coperto;
+    @Value("${ordine.admin.coperto}")
+    private double coperto;
 
-    public Ordine(int id, StatoOrdine statoOrdine, int places, LocalDate orderDate, List<ElementiMenu> menuList, Double coperto) {
-        this.id = id;
+    public Ordine(StatoOrdine statoOrdine, int places, List<ElementiMenu> menuList, Tavolo tavolo, double coperto) {
+        this.id = count ++;
         this.statoOrdine = statoOrdine;
         this.places = places;
-        this.orderDate = orderDate;
+        this.ora = LocalTime.now();
         this.menuList = menuList;
-        this.coperto = coperto;
+        this.tavolo = tavolo;
         this.bill = bill;
+        this.coperto = coperto;
     }
 
     public Ordine() {
+    }
+
+    public int getCount() {
+        return count;
+    }
+
+    public void setCount(int count) {
+        this.count = count;
     }
 
     public int getId() {
@@ -58,12 +65,12 @@ public class Ordine {
         this.places = places;
     }
 
-    public LocalDate getOrderDate() {
-        return orderDate;
+    public LocalTime getOra() {
+        return ora;
     }
 
-    public void setOrderDate(LocalDate orderDate) {
-        this.orderDate = orderDate;
+    public void setOra(LocalTime ora) {
+        this.ora = ora;
     }
 
     public List<ElementiMenu> getMenuList() {
@@ -74,6 +81,13 @@ public class Ordine {
         this.menuList = menuList;
     }
 
+    public Tavolo getTavolo() {
+        return tavolo;
+    }
+
+    public void setTavolo(Tavolo tavolo) {
+        this.tavolo = tavolo;
+    }
 
     public double getBill() {
         return bill;
@@ -83,17 +97,32 @@ public class Ordine {
         this.bill = bill;
     }
 
+    public double getCoperto() {
+        return coperto;
+    }
+
+    public void setCoperto(double coperto) {
+        this.coperto = coperto;
+    }
+
+    public void stampaElementiOrdine() {
+        System.out.println("ordine num." + this.id);
+        System.out.println(this.menuList);
+    }
 
     @Override
     public String toString() {
         return
                 "ORDINE num." + id +
-                ", stato dell'ordine:" + statoOrdine +
-                ", coperti:" + places +
-                ", data:" + orderDate +
-                ", piatti e bevande ordinati:" + menuList +
-                ", costo del coperto per persona:" + coperto+
+                ", stato ordine: " + statoOrdine +
+                ", numero prenotati:" + places +
+                ", ora:" + ora +
                 ", costo totale:" + bill +
+                ", coperto per persona:" + coperto +
                 '}';
     }
 }
+
+
+
+
