@@ -26,7 +26,6 @@ public class Ordine {
         this.ora = LocalTime.now();
         this.menuList = menuList;
         this.tavolo = tavolo;
-        this.bill = bill;
         this.coperto = coperto;
     }
 
