@@ -37,9 +37,12 @@ public class Runner implements CommandLineRunner {
         System.out.println(o3);
         System.out.println("");
 
-        o1.stampaElementiOrdine();
-        o2.stampaElementiOrdine();
-        o3.stampaElementiOrdine();
+
+        o1.TotaleOrdine();
+        o2.TotaleOrdine();
+        o3.TotaleOrdine();
+
+
 
 
 

@@ -33,6 +33,14 @@ public class Ordine {
     public Ordine() {
     }
 
+    public double TotaleOrdine (){
+        System.out.println("Ordine num." + this.id);
+        System.out.println(this.menuList);
+        double totale = this.menuList.stream().mapToDouble(ElementiMenu::getPrice).sum() + (this.coperto * this.places);
+        System.out.println("Totale ordine:" + totale + "€");
+        return totale;
+    }
+
     public int getCount() {
         return count;
     }
@@ -105,10 +113,7 @@ public class Ordine {
         this.coperto = coperto;
     }
 
-    public void stampaElementiOrdine() {
-        System.out.println("ordine num." + this.id);
-        System.out.println(this.menuList);
-    }
+
 
     @Override
     public String toString() {
